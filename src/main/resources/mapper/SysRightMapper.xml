@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SysRightMapper">
+  <resultMap id="BaseResultMap" type="com.bean.SysRight">
+    <id column="rightCode" jdbcType="VARCHAR" property="rightcode" />
+    <result column="rightParentCode" jdbcType="VARCHAR" property="rightparentcode" />
+    <result column="rightType" jdbcType="VARCHAR" property="righttype" />
+    <result column="rightText" jdbcType="VARCHAR" property="righttext" />
+    <result column="rightUrl" jdbcType="VARCHAR" property="righturl" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_right
+    where rightCode = #{rightcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bean.SysRight">
+    insert into sys_right (rightCode, rightParentCode, rightType, 
+      rightText, rightUrl)
+    values (#{rightcode,jdbcType=VARCHAR}, #{rightparentcode,jdbcType=VARCHAR}, #{righttype,jdbcType=VARCHAR}, 
+      #{righttext,jdbcType=VARCHAR}, #{righturl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bean.SysRight">
+    update sys_right
+    set rightParentCode = #{rightparentcode,jdbcType=VARCHAR},
+      rightType = #{righttype,jdbcType=VARCHAR},
+      rightText = #{righttext,jdbcType=VARCHAR},
+      rightUrl = #{righturl,jdbcType=VARCHAR}
+    where rightCode = #{rightcode,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select rightCode, rightParentCode, rightType, rightText, rightUrl
+    from sys_right
+    where rightCode = #{rightcode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select rightCode, rightParentCode, rightType, rightText, rightUrl
+    from sys_right
+  </select>
+</mapper>
